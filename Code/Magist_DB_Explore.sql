@@ -1,4 +1,4 @@
-/*** Explore magist DB ***/
+/*** Explore Magist DB ***/
 
 USE magist;
 
