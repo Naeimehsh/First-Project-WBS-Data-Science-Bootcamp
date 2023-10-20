@@ -1,11 +1,11 @@
 /*** answer business questions ***/
 
-USE magist;
+USE Magist;
 
 /** ------ 3.1 ---------**/
 
 
--- what categories of tech does magist have?
+-- What categories of tech does Magist have?
 -- FIRST, check which categories contain these words:
 SELECT product_category_name_english FROM product_category_name_translation
 WHERE  product_category_name_english LIKE '%tech%'
@@ -40,7 +40,7 @@ WHERE
         'fixed_telephony')
 ;
 
--- how many tech products have been sold overall?  - > 9367
+-- How many tech products have been sold overall?  - > 9367
 SELECT 
     COUNT(order_items.product_id)
 FROM
@@ -95,7 +95,7 @@ FROM
     order_items;
 
 
--- are expensive tech products popular? NO
+-- Are expensive tech products popular? NO
 SELECT 
     COUNT(order_items.product_id) AS sold_tech_products,
     CASE
@@ -124,7 +124,7 @@ GROUP BY price_category;
 
 /** ------ 3.2 ---------**/
 
--- how many months of data are covered in db? -> 25 months
+-- How many months of data are covered in db? -> 25 months
 SELECT 
     TIMESTAMPDIFF(MONTH,
         MIN(order_purchase_timestamp),
@@ -132,13 +132,13 @@ SELECT
 FROM
     orders;
 
--- how many sellers?
+-- How many sellers?
 SELECT 
     COUNT(DISTINCT seller_id)
 FROM
     sellers;
 
--- how many tech sellers? -> 334
+-- How many tech sellers? -> 334
 SELECT 
     COUNT(DISTINCT seller_id)
 FROM
@@ -159,18 +159,18 @@ WHERE
         'fixed_telephony')
 ;
 
--- what percentage of overall sellers are tech sellers? 10.8%
+-- What percentage of overall sellers are tech sellers? 10.8%
 SELECT 
     334 / COUNT(DISTINCT seller_id) * 100
 FROM
     sellers;
 
 
--- total amount earned by all sellers?
+-- Total amount earned by all sellers?
 SELECT SUM(price) FROM order_items;
 
 
--- total amount earned by all tech sellers?
+-- Total amount earned by all tech sellers?
 SELECT 
     SUM(price) AS earned_by_tech_sellers
 FROM
@@ -191,13 +191,13 @@ WHERE
         'fixed_telephony')
 ;
         
--- average monthly income of all sellers?
+-- Average monthly income of all sellers?
 SELECT 
     SUM(price) / COUNT(DISTINCT seller_id) / 25
 FROM
     order_items;
 
--- monthly avg income of all tech sellers?
+-- Monthly avg income of all tech sellers?
 SELECT 
     SUM(price) / COUNT(DISTINCT seller_id) / 25
 FROM
@@ -238,7 +238,7 @@ FROM
     
     
 
--- how many orderes are deliverd with a delay? -> 6535
+-- How many orderes are deliverd with a delay? -> 6535
 SELECT 
     COUNT(TIMESTAMPDIFF(DAY,
         order_delivered_customer_date,
@@ -262,7 +262,7 @@ WHERE
         order_estimated_delivery_date,
         order_delivered_customer_date) <= 0;   
 
--- is there any pattern for delays?
+-- Is there any pattern for delays?
 SELECT 
     AVG(products.product_weight_g),
     AVG(products.product_length_cm),
